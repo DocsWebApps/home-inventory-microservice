@@ -1,6 +1,6 @@
 package com.docswebapps.homeinventoryservice.web.controller.v1;
 
-import com.docswebapps.homeinventoryservice.web.model.MakeDto;
+import com.docswebapps.homeinventoryservice.web.model.OwnerDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,52 +14,52 @@ import java.time.ZoneId;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MakeController.class)
-class MakeControllerTest {
+@WebMvcTest(OwnerController.class)
+class OwnerControllerTest {
+    private static final String URL = "/api/v1/owner/";
+
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final String URL= "/api/v1/make/";
-
-    private MakeDto makeDto = MakeDto.builder()
+    private OwnerDto ownerDto = OwnerDto.builder()
             .id(999L)
-            .name("TestMake")
+            .firstName("TestFirstName")
+            .lastName("TestLastName")
             .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
-            .lastModifiedDate(OffsetDateTime.now(ZoneId.systemDefault()))
+            .lastModifiedDate((OffsetDateTime.now(ZoneId.systemDefault())))
             .build();
 
     @Test
-    void createNewMake() throws Exception {
-        String makeDtoJson = objectMapper.writeValueAsString(makeDto);
-
+    void createNewOwner() throws Exception {
+        String ownerToJson = objectMapper.writeValueAsString(ownerDto);
         mockMvc.perform(post(URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(makeDtoJson))
+                .content(ownerToJson))
                 .andExpect(status().isCreated());
     }
 
     @Test
-    void getMakeById() throws Exception {
-        mockMvc.perform(get(URL + makeDto.getId())
+    void getOwnerById() throws Exception {
+        mockMvc.perform(get(URL + ownerDto.getId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void updateMakeById() throws Exception {
-        String makeDtoJson = objectMapper.writeValueAsString(makeDto);
-
-        mockMvc.perform(put(URL + makeDto.getId())
+    void updateOwnerById() throws Exception {
+        String ownerToJson = objectMapper.writeValueAsString(ownerDto);
+        mockMvc.perform(put(URL + ownerDto.getId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(makeDtoJson))
+                .content(ownerToJson))
                 .andExpect(status().isNoContent());
     }
 
     @Test
-    void deleteMakeById() throws Exception {
-        mockMvc.perform(delete(URL + makeDto.getId())).andExpect(status().isNoContent());
+    void deleteOwnerById() throws Exception {
+        mockMvc.perform(delete(URL + ownerDto.getId())).andExpect(status().isNoContent());
     }
+
 }

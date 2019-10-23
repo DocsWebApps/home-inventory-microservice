@@ -1,6 +1,6 @@
 package com.docswebapps.homeinventoryservice.web.controller.v1;
 
-import com.docswebapps.homeinventoryservice.web.model.MakeDto;
+import com.docswebapps.homeinventoryservice.web.model.LocationDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,52 +14,51 @@ import java.time.ZoneId;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MakeController.class)
-class MakeControllerTest {
+@WebMvcTest(LocationController.class)
+class LocationControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final String URL= "/api/v1/make/";
-
-    private MakeDto makeDto = MakeDto.builder()
+    private LocationDto locationDto = LocationDto.builder()
             .id(999L)
-            .name("TestMake")
+            .name("TestLocation")
             .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
             .lastModifiedDate(OffsetDateTime.now(ZoneId.systemDefault()))
             .build();
 
-    @Test
-    void createNewMake() throws Exception {
-        String makeDtoJson = objectMapper.writeValueAsString(makeDto);
+    private static final String URL = "/api/v1/location/";
 
+    @Test
+    void createNewLocation() throws Exception {
+        String locationToJson = objectMapper.writeValueAsString(locationDto);
         mockMvc.perform(post(URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(makeDtoJson))
+                .content(locationToJson))
                 .andExpect(status().isCreated());
     }
 
     @Test
-    void getMakeById() throws Exception {
-        mockMvc.perform(get(URL + makeDto.getId())
+    void getLocationById() throws Exception {
+        mockMvc.perform(get(URL + locationDto.getId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void updateMakeById() throws Exception {
-        String makeDtoJson = objectMapper.writeValueAsString(makeDto);
-
-        mockMvc.perform(put(URL + makeDto.getId())
+    void updateLocationById() throws Exception {
+        String locationToJson = objectMapper.writeValueAsString(locationDto);
+        mockMvc.perform(put(URL + locationDto.getId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(makeDtoJson))
+                .content(locationToJson))
                 .andExpect(status().isNoContent());
     }
 
     @Test
-    void deleteMakeById() throws Exception {
-        mockMvc.perform(delete(URL + makeDto.getId())).andExpect(status().isNoContent());
+    void deleteLocationById() throws Exception {
+        mockMvc.perform(delete(URL + locationDto.getId())).andExpect(status().isNoContent());
     }
+
 }

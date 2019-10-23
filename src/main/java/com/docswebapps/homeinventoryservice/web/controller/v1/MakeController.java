@@ -34,7 +34,7 @@ public class MakeController {
     }
 
     @PostMapping
-    public ResponseEntity saveNewMake(@RequestBody MakeDto makeDto) throws Exception{
+    public ResponseEntity createNewMake(@RequestBody MakeDto makeDto) throws Exception{
         // To-Do Implementation
         URI location = new URI("/api/v1/make/1");
         return ResponseEntity.created(location).build();
