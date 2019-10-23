@@ -2,10 +2,10 @@ package com.docswebapps.homeinventoryservice.web.controller.v1;
 
 import com.docswebapps.homeinventoryservice.web.model.MakeDto;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 
@@ -19,7 +19,7 @@ public class MakeController {
     @GetMapping("/test")
     public ResponseEntity<MakeDto> getTestDTO() {
         MakeDto makeDto = MakeDto.builder()
-                .id(1L)
+                .id(0L)
                 .name(this.instanceId)
                 .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
                 .lastModifiedDate(OffsetDateTime.now(ZoneId.systemDefault()))
@@ -34,20 +34,21 @@ public class MakeController {
     }
 
     @PostMapping
-    public ResponseEntity saveNewMake(@RequestBody MakeDto makeDto) {
+    public ResponseEntity saveNewMake(@RequestBody MakeDto makeDto) throws Exception{
         // To-Do Implementation
-        return new ResponseEntity(HttpStatus.CREATED);
+        URI location = new URI("/api/v1/make/1");
+        return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{makeId}")
-    public ResponseEntity updateMakeById(@PathVariable("makeId") Long makeId) {
+    public ResponseEntity updateMakeById(@PathVariable("makeId") Long makeId, @RequestBody MakeDto makeDto) {
         // To-Do Implementation
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{makeId}")
     public ResponseEntity deleteMakeById(@PathVariable("makeId") Long makeId) {
         // To-Do Implementation
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }

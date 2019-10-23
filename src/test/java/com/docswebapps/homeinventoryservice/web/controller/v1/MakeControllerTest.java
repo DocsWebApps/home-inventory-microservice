@@ -8,26 +8,28 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MakeController.class)
 class MakeControllerTest {
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
+
+    private MakeDto makeDto = MakeDto.builder()
+            .id(999L).name("DavesTest")
+            .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
+            .lastModifiedDate(OffsetDateTime.now(ZoneId.systemDefault()))
+            .build();
 
     @Test
-    void getMakeById() throws Exception {
-        mockMvc.perform(get("/api/v1/make/1").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void saveNewMake() throws Exception {
-        MakeDto makeDto = MakeDto.builder().build();
+    void saveNewMake() throws Exception { ;
         String makeDtoJson = objectMapper.writeValueAsString(makeDto);
 
         mockMvc.perform(post("/api/v1/make")
@@ -37,18 +39,23 @@ class MakeControllerTest {
     }
 
     @Test
+    void getMakeById() throws Exception {
+        mockMvc.perform(get("/api/v1/make/" + makeDto.getId()).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void updateMakeById() throws Exception {
-        MakeDto makeDto = MakeDto.builder().build();
         String makeDtoJson = objectMapper.writeValueAsString(makeDto);
 
-        mockMvc.perform(put("/api/v1/make/1")
+        mockMvc.perform(put("/api/v1/make/" + makeDto.getId())
                 .contentType(MediaType.APPLICATION_JSON)
-                . content(makeDtoJson))
+                .content(makeDtoJson))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     void deleteMakeById() throws Exception {
-        mockMvc.perform(delete("/api/v1/make/1")).andExpect(status().isNoContent());
+        mockMvc.perform(delete("/api/v1/make/" + makeDto.getId())).andExpect(status().isNoContent());
     }
 }
