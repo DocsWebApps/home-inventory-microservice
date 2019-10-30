@@ -20,7 +20,7 @@ public class Model {
     @Column(updatable = false, nullable = false)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+   @Column(unique = true, nullable = false)
     private String name;
 
     @CreationTimestamp

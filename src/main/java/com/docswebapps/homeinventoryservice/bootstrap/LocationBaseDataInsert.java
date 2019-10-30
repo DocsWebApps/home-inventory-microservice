@@ -19,6 +19,7 @@ public class LocationBaseDataInsert implements CommandLineRunner {
             locationRepository.save(Location.builder().name("Garage").build());
             locationRepository.save(Location.builder().name("Shed").build());
             locationRepository.save(Location.builder().name("Dining Room").build());
+            locationRepository.save(Location.builder().name("Test").build());
         }
     }
 }

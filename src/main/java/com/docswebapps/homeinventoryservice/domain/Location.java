@@ -1,4 +1,5 @@
 package com.docswebapps.homeinventoryservice.domain;
+
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
