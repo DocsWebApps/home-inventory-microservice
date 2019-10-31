@@ -8,9 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,12 +21,11 @@ class MakeControllerTest {
 
     private static final String URL= "/api/v1/make/";
 
-    private MakeDto makeDto = MakeDto.builder()
-            .id(999L)
+    private final MakeDto makeDto = MakeDto.builder()
             .name("TestMake")
-            .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
-            .lastModifiedDate(OffsetDateTime.now(ZoneId.systemDefault()))
             .build();
+
+    private final Long id = 999L;
 
     @Test
     void createNewMake() throws Exception {
@@ -43,7 +39,7 @@ class MakeControllerTest {
 
     @Test
     void getMakeById() throws Exception {
-        mockMvc.perform(get(URL + makeDto.getId())
+        mockMvc.perform(get(URL +  this.id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -52,7 +48,7 @@ class MakeControllerTest {
     void updateMakeById() throws Exception {
         String makeDtoJson = objectMapper.writeValueAsString(makeDto);
 
-        mockMvc.perform(put(URL + makeDto.getId())
+        mockMvc.perform(put(URL +  this.id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(makeDtoJson))
                 .andExpect(status().isNoContent());
@@ -60,6 +56,6 @@ class MakeControllerTest {
 
     @Test
     void deleteMakeById() throws Exception {
-        mockMvc.perform(delete(URL + makeDto.getId())).andExpect(status().isNoContent());
+        mockMvc.perform(delete(URL +  this.id)).andExpect(status().isNoContent());
     }
 }

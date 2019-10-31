@@ -8,9 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,12 +21,11 @@ class CategoryControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    CategoryDto categoryDto = CategoryDto.builder()
-            .id(999L)
+    private final CategoryDto categoryDto = CategoryDto.builder()
             .name("CategoryTest")
-            .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
-            .lastModifiedDate(OffsetDateTime.now(ZoneId.systemDefault()))
             .build();
+
+    private final Long id = 999L;
 
     @Test
     void createCategory() throws Exception {
@@ -42,7 +38,7 @@ class CategoryControllerTest {
 
     @Test
     void getCategoryById() throws Exception {
-        mockMvc.perform(get(URL + categoryDto.getId())
+        mockMvc.perform(get(URL + this.id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -50,7 +46,7 @@ class CategoryControllerTest {
     @Test
     void updateCategoryById() throws Exception {
         String categoryToJson = objectMapper.writeValueAsString(categoryDto);
-        mockMvc.perform(put(URL + categoryDto.getId())
+        mockMvc.perform(put(URL +  this.id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(categoryToJson))
                 .andExpect(status().isNoContent());
@@ -58,7 +54,7 @@ class CategoryControllerTest {
 
     @Test
     void deleteCategoryById() throws Exception {
-        mockMvc.perform(delete(URL + categoryDto.getId())).andExpect(status().isNoContent());
+        mockMvc.perform(delete(URL +  this.id)).andExpect(status().isNoContent());
     }
 
 }

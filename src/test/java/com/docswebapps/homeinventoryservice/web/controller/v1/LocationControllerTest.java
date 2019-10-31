@@ -8,9 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,12 +19,11 @@ class LocationControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private LocationDto locationDto = LocationDto.builder()
-            .id(999L)
+    private final LocationDto locationDto = LocationDto.builder()
             .name("TestLocation")
-            .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
-            .lastModifiedDate(OffsetDateTime.now(ZoneId.systemDefault()))
             .build();
+
+    private final Long id = 999L;
 
     private static final String URL = "/api/v1/location/";
 
@@ -42,7 +38,7 @@ class LocationControllerTest {
 
     @Test
     void getLocationById() throws Exception {
-        mockMvc.perform(get(URL + locationDto.getId())
+        mockMvc.perform(get(URL +  this.id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -50,7 +46,7 @@ class LocationControllerTest {
     @Test
     void updateLocationById() throws Exception {
         String locationToJson = objectMapper.writeValueAsString(locationDto);
-        mockMvc.perform(put(URL + locationDto.getId())
+        mockMvc.perform(put(URL +  this.id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(locationToJson))
                 .andExpect(status().isNoContent());
@@ -58,7 +54,7 @@ class LocationControllerTest {
 
     @Test
     void deleteLocationById() throws Exception {
-        mockMvc.perform(delete(URL + locationDto.getId())).andExpect(status().isNoContent());
+        mockMvc.perform(delete(URL +  this.id)).andExpect(status().isNoContent());
     }
 
 }

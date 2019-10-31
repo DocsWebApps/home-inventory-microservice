@@ -33,26 +33,22 @@ public class MakeController {
 
     @GetMapping("/{makeId}")
     public ResponseEntity<MakeDto> getMakeById(@PathVariable("makeId") Long makeId) {
-        // To-Do Implementation
         return ResponseEntity.ok().body(MakeDto.builder().build());
     }
 
     @PostMapping
     public ResponseEntity createNewMake(@Valid @RequestBody MakeDto makeDto) throws Exception{
-        // To-Do Implementation
         URI location = new URI("/api/v1/make/1");
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{makeId}")
     public ResponseEntity updateMakeById(@PathVariable("makeId") Long makeId, @Valid @RequestBody MakeDto makeDto) {
-        // To-Do Implementation
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{makeId}")
     public ResponseEntity deleteMakeById(@PathVariable("makeId") Long makeId) {
-        // To-Do Implementation
         return ResponseEntity.noContent().build();
     }
 

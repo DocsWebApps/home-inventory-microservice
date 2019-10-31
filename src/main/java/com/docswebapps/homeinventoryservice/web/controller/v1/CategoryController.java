@@ -1,10 +1,14 @@
 package com.docswebapps.homeinventoryservice.web.controller.v1;
 import com.docswebapps.homeinventoryservice.web.model.CategoryDto;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/category")
@@ -16,13 +20,13 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity createCategory(@RequestBody CategoryDto categoryDto) throws URISyntaxException {
+    public ResponseEntity createCategory(@Valid @RequestBody CategoryDto categoryDto) throws URISyntaxException {
         URI location = new URI("/api/v1/category/1");
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{categoryId}")
-    public ResponseEntity updateCategory(@PathVariable("categoryId") Long categoryId, @RequestBody CategoryDto categoryDto) {
+    public ResponseEntity updateCategory(@PathVariable("categoryId") Long categoryId, @Valid @RequestBody CategoryDto categoryDto) {
         return ResponseEntity.noContent().build();
     }
 
@@ -31,4 +35,12 @@ public class CategoryController {
         return ResponseEntity.noContent().build();
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List> handleExceptions(MethodArgumentNotValidException e) {
+        List<String> errors = new ArrayList<>();
+        e.getBindingResult()
+                .getFieldErrors()
+                .forEach(error-> errors.add("ERROR: " + error.getField() + " - " + error.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(errors);
+    }
 }

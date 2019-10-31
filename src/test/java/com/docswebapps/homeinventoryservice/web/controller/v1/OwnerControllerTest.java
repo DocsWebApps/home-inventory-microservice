@@ -8,9 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,13 +21,11 @@ class OwnerControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private OwnerDto ownerDto = OwnerDto.builder()
-            .id(999L)
-            .firstName("TestFirstName")
-            .lastName("TestLastName")
-            .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
-            .lastModifiedDate((OffsetDateTime.now(ZoneId.systemDefault())))
+    private final OwnerDto ownerDto = OwnerDto.builder()
+            .name("TestFirstName")
             .build();
+
+    private final Long id = 999L;
 
     @Test
     void createNewOwner() throws Exception {
@@ -43,7 +38,7 @@ class OwnerControllerTest {
 
     @Test
     void getOwnerById() throws Exception {
-        mockMvc.perform(get(URL + ownerDto.getId())
+        mockMvc.perform(get(URL +  this.id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -51,7 +46,7 @@ class OwnerControllerTest {
     @Test
     void updateOwnerById() throws Exception {
         String ownerToJson = objectMapper.writeValueAsString(ownerDto);
-        mockMvc.perform(put(URL + ownerDto.getId())
+        mockMvc.perform(put(URL +  this.id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(ownerToJson))
                 .andExpect(status().isNoContent());
@@ -59,7 +54,7 @@ class OwnerControllerTest {
 
     @Test
     void deleteOwnerById() throws Exception {
-        mockMvc.perform(delete(URL + ownerDto.getId())).andExpect(status().isNoContent());
+        mockMvc.perform(delete(URL +  this.id)).andExpect(status().isNoContent());
     }
 
 }

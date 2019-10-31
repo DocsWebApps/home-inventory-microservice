@@ -8,9 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,12 +21,11 @@ class ModelControllerTest {
 
     private static final String URL= "/api/v1/model/";
 
-    private ModelDto modelDto = ModelDto.builder()
-            .id(999L)
+    private final ModelDto modelDto = ModelDto.builder()
             .name("TestModel")
-            .createdDate(OffsetDateTime.now(ZoneId.systemDefault()))
-            .lastModifiedDate(OffsetDateTime.now(ZoneId.systemDefault()))
             .build();
+
+    private final Long id = 999L;
 
     @Test
     void createNewModel() throws Exception {
@@ -43,7 +39,7 @@ class ModelControllerTest {
 
     @Test
     void getModelById() throws Exception {
-        mockMvc.perform(get(URL + modelDto.getId())
+        mockMvc.perform(get(URL +  this.id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -52,7 +48,7 @@ class ModelControllerTest {
     void updateModelById() throws Exception {
         String modelDtoJson = objectMapper.writeValueAsString(modelDto);
 
-        mockMvc.perform(put(URL + modelDto.getId())
+        mockMvc.perform(put(URL +  this.id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(modelDtoJson))
                 .andExpect(status().isNoContent());
@@ -60,6 +56,6 @@ class ModelControllerTest {
 
     @Test
     void deleteModelById() throws Exception {
-        mockMvc.perform(delete(URL + modelDto.getId())).andExpect(status().isNoContent());
+        mockMvc.perform(delete(URL +  this.id)).andExpect(status().isNoContent());
     }
 }
