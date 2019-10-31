@@ -1,35 +1,22 @@
 package com.docswebapps.homeinventoryservice.domain;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.OffsetDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name="categories")
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false, updatable = false)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
-    private String name;
-
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
-    private OffsetDateTime createdDate;
-
-    @UpdateTimestamp
-    @Column(nullable = false)
-    private OffsetDateTime lastModifiedDate;
-
-    @Version
-    private Long version;
+public class Category extends Base {
+    @Builder
+    public Category(Long id, String name, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate, Long version) {
+        super(id, name, createdDate, lastModifiedDate, version);
+    }
 }
