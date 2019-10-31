@@ -2,14 +2,12 @@ package com.docswebapps.homeinventoryservice.web.controller.v1;
 
 import com.docswebapps.homeinventoryservice.web.model.LocationDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v1/location")
@@ -33,14 +31,5 @@ public class LocationController {
     @DeleteMapping("/{locationId}")
     public ResponseEntity deleteLocationById(@PathVariable("locationId") Long locationId) {
         return ResponseEntity.noContent().build();
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List> handleExceptions(MethodArgumentNotValidException e) {
-        List<String> errors = new ArrayList<>();
-        e.getBindingResult()
-                .getFieldErrors()
-                .forEach(error-> errors.add("ERROR: " + error.getField() + " - " + error.getDefaultMessage()));
-        return ResponseEntity.badRequest().body(errors);
     }
 }
