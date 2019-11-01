@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.OffsetDateTime;
+import java.sql.Timestamp;
 
 @Getter
 @AllArgsConstructor
@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 @MappedSuperclass
 class Base {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
 
@@ -24,12 +24,13 @@ class Base {
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private OffsetDateTime createdDate;
+    private Timestamp createdDate;
 
     @UpdateTimestamp
     @Column(nullable = false)
-    private OffsetDateTime lastModifiedDate;
+    private Timestamp lastModifiedDate;
 
     @Version
+    @Column(nullable = false)
     private Long version;
 }

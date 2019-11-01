@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.time.OffsetDateTime;
+import java.sql.Timestamp;
 import java.util.Collection;
 
 @Getter
@@ -22,7 +22,7 @@ public class Make extends Base {
     private Collection<Model> models;
 
     @Builder
-    public Make(Long id, String name, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate, Long version, Collection<Model> models) {
+    public Make(Long id, String name, Timestamp createdDate, Timestamp lastModifiedDate, Long version, Collection<Model> models) {
         super(id, name, createdDate, lastModifiedDate, version);
         this.models = models;
     }
