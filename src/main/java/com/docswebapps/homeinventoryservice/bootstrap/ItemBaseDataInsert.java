@@ -42,7 +42,6 @@ public class ItemBaseDataInsert implements CommandLineRunner {
                     .haveReceipt(false)
                     .serialNumber("A5N")
                     .purchaseDate(LocalDate.now())
-                    .estimatedDate(false)
                     .itemOwner(owner.get())
                     .itemCategory(category.get())
                     .itemModel(model.get())

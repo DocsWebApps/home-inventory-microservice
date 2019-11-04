@@ -30,9 +30,6 @@ public class Item {
     private LocalDate purchaseDate;
 
     @Column(nullable = false)
-    private boolean estimatedDate;
-
-    @Column(nullable = false)
     private boolean haveReceipt;
 
     @Column
@@ -45,6 +42,10 @@ public class Item {
     @UpdateTimestamp
     @Column(nullable = false)
     private Timestamp lastModifiedDate;
+
+    @Version
+    @Column(nullable = false)
+    private Long version;
 
     @ManyToOne
     private Model itemModel;
