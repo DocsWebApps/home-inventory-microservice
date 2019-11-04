@@ -2,9 +2,11 @@ package com.docswebapps.homeinventoryservice.bootstrap;
 import com.docswebapps.homeinventoryservice.domain.Location;
 import com.docswebapps.homeinventoryservice.repository.LocationRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(2)
 public class LocationBaseDataInsert implements CommandLineRunner {
     private final LocationRepository locationRepository;
 

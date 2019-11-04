@@ -2,9 +2,11 @@ package com.docswebapps.homeinventoryservice.bootstrap;
 import com.docswebapps.homeinventoryservice.domain.Owner;
 import com.docswebapps.homeinventoryservice.repository.OwnerRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(2)
 public class OwnerBaseDataInsert implements CommandLineRunner {
     private final OwnerRepository ownerRepository;
 

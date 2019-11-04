@@ -3,12 +3,14 @@ package com.docswebapps.homeinventoryservice.bootstrap;
 import com.docswebapps.homeinventoryservice.domain.*;
 import com.docswebapps.homeinventoryservice.repository.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 @Component
+@Order(3)
 public class ItemBaseDataInsert implements CommandLineRunner {
     private final OwnerRepository ownerRepository;
     private final LocationRepository locationRepository;

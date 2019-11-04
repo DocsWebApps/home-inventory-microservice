@@ -5,10 +5,12 @@ import com.docswebapps.homeinventoryservice.domain.Model;
 import com.docswebapps.homeinventoryservice.repository.MakeRepository;
 import com.docswebapps.homeinventoryservice.repository.ModelRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 
 @Component
+@Order(2)
 public class ModelBaseDataInsert implements CommandLineRunner {
     private final ModelRepository modelRepository;
     private final MakeRepository makeRepository;

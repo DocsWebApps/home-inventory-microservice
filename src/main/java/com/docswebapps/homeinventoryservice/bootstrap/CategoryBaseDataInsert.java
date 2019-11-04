@@ -2,9 +2,11 @@ package com.docswebapps.homeinventoryservice.bootstrap;
 import com.docswebapps.homeinventoryservice.domain.Category;
 import com.docswebapps.homeinventoryservice.repository.CategoryRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(2)
 public class CategoryBaseDataInsert implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
 
