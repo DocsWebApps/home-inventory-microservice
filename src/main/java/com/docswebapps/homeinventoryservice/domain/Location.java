@@ -6,8 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -15,8 +18,13 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "locations")
 public class Location extends Base {
+    @OneToMany(mappedBy = "itemLocation", fetch = FetchType.LAZY)
+    private Collection<Item> items;
+
     @Builder
-    public Location(Long id, String name, Timestamp createdDate, Timestamp lastModifiedDate, Long  version) {
+    public Location(Long id, String name, Timestamp createdDate, Timestamp lastModifiedDate, Long  version,
+                    Collection<Item> items) {
         super(id, name, createdDate, lastModifiedDate, version);
+        this.items = items;
     }
 }

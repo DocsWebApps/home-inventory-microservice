@@ -63,6 +63,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.7.0.1746</version>
+        </dependency>
         <!-- Have to add JAX libraries in Java 11 plus -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
