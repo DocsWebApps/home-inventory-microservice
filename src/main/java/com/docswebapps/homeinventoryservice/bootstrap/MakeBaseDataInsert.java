@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("makeBaseDataInsert")
 @Order(1)
 public class MakeBaseDataInsert implements CommandLineRunner {
     private final MakeRepository makeRepository;

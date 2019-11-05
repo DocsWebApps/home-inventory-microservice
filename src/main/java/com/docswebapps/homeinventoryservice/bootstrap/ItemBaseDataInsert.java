@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Optional;
 
-@Component
+@Component("itemDataInsert")
 @Order(3)
 public class ItemBaseDataInsert implements CommandLineRunner {
     private final OwnerRepository ownerRepository;

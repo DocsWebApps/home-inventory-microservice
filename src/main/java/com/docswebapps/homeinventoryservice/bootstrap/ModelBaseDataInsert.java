@@ -8,8 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 
-@Component
+
+@Component("modelBaseDataInsert")
 @Order(2)
 public class ModelBaseDataInsert implements CommandLineRunner {
     private final ModelRepository modelRepository;
@@ -22,12 +24,12 @@ public class ModelBaseDataInsert implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Make samsung = makeRepository.findByName("Samsung");
-        if(modelRepository.count() == 0) {
-            modelRepository.save(Model.builder().name("S5").modelMake(samsung).build());
-            modelRepository.save(Model.builder().name("S6").modelMake(samsung).build());
-            modelRepository.save(Model.builder().name("S8").modelMake(samsung).build());
-            modelRepository.save(Model.builder().name("S10").modelMake(samsung).build());
+        Optional<Make> samsung = makeRepository.findByName("Samsung");
+        if(modelRepository.count() == 0 && samsung.isPresent()) {
+            modelRepository.save(Model.builder().name("S5").modelMake(samsung.get()).build());
+            modelRepository.save(Model.builder().name("S6").modelMake(samsung.get()).build());
+            modelRepository.save(Model.builder().name("S8").modelMake(samsung.get()).build());
+            modelRepository.save(Model.builder().name("S10").modelMake(samsung.get()).build());
         }
     }
 }

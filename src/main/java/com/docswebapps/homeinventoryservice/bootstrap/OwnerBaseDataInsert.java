@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("ownerBaseDataInsert")
 @Order(2)
 public class OwnerBaseDataInsert implements CommandLineRunner {
     private final OwnerRepository ownerRepository;

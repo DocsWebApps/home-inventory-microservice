@@ -2,6 +2,8 @@ package com.docswebapps.homeinventoryservice.repository;
 import com.docswebapps.homeinventoryservice.domain.Make;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.Optional;
+
 public interface MakeRepository extends PagingAndSortingRepository<Make, Long> {
-    public Make findByName(String name);
+    Optional<Make> findByName(String name);
 }
