@@ -16,7 +16,7 @@ public class OwnerBaseDataInsert implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(ownerRepository.count() == 0) {
+        if (ownerRepository.count() == 0) {
             ownerRepository.save(Owner.builder().name("Dave").build());
             ownerRepository.save(Owner.builder().name("Sarah").build());
             ownerRepository.save(Owner.builder().name("Frazer").build());

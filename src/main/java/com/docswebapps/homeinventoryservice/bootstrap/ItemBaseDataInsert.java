@@ -37,7 +37,7 @@ public class ItemBaseDataInsert implements CommandLineRunner {
         Optional<Location> location = this.locationRepository.findByName("Living Room");
         Optional<Model> model = this.modelRepository.findByName("S5");
 
-        if(owner.isPresent() && location.isPresent() && category.isPresent() && model.isPresent() && this.itemRepository.count() == 0) {
+        if (owner.isPresent() && location.isPresent() && category.isPresent() && model.isPresent() && this.itemRepository.count() == 0) {
             this.itemRepository.save(Item.builder()
                     .additionalInfo("AdditionalInfo")
                     .cost(399.99d)

@@ -25,7 +25,7 @@ public class ModelBaseDataInsert implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Optional<Make> samsung = makeRepository.findByName("Samsung");
-        if(modelRepository.count() == 0 && samsung.isPresent()) {
+        if (modelRepository.count() == 0 && samsung.isPresent()) {
             modelRepository.save(Model.builder().name("S5").modelMake(samsung.get()).build());
             modelRepository.save(Model.builder().name("S6").modelMake(samsung.get()).build());
             modelRepository.save(Model.builder().name("S8").modelMake(samsung.get()).build());

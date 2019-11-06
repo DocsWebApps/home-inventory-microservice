@@ -17,7 +17,7 @@ public class MakeBaseDataInsert implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(makeRepository.count() == 0) {
+        if (makeRepository.count() == 0) {
             makeRepository.save(Make.builder().name("Samsung").build());
             makeRepository.save(Make.builder().name("Sony").build());
             makeRepository.save(Make.builder().name("LG").build());

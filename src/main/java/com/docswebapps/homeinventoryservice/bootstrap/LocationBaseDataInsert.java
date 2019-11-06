@@ -16,7 +16,7 @@ public class LocationBaseDataInsert implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(locationRepository.count() == 0) {
+        if (locationRepository.count() == 0) {
             locationRepository.save(Location.builder().name("Living Room").build());
             locationRepository.save(Location.builder().name("Garage").build());
             locationRepository.save(Location.builder().name("Shed").build());

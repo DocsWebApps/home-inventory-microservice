@@ -16,7 +16,7 @@ public class CategoryBaseDataInsert implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(categoryRepository.count() == 0) {
+        if (categoryRepository.count() == 0) {
             categoryRepository.save(Category.builder().name("Electronic").build());
             categoryRepository.save(Category.builder().name("Books").build());
             categoryRepository.save(Category.builder().name("Jewellery").build());
