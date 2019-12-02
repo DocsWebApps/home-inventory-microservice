@@ -1,0 +1,5 @@
+---
+# Set application name
+spring:
+  application:
+    name: home-inventory-service

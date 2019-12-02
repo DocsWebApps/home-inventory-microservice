@@ -1,0 +1,31 @@
+---
+# Set server port
+server:
+  port: ${WORK_TOMCAT_SERVER_PORT}
+
+# Set application name and datasource
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: ${WORK_DB_URL}
+    username: ${WORK_ADMIN_USERNAME}
+    password: ${WORK_ADMIN_PASSWORD}
+
+## Set up Eureka server
+eureka:
+  client:
+    service-url:
+      defaultZone: ${WORK_EUREKA_SERVER}
+
+## Set logging to debug/trace
+logging:
+  level:
+    org:
+      springframwork: debug
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace
