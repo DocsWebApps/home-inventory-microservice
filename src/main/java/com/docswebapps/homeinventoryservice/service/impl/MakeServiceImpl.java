@@ -32,7 +32,7 @@ public class MakeServiceImpl implements MakeService {
     @Override
     public MakeDto getMakeById(Long id) {
         Optional<Make> makeOpt = this.makeRepository.findById(id);
-        return makeOpt.map(makeMapper::makeToMakeDto).orElse(new MakeDto());
+        return makeOpt.map(makeMapper::makeToMakeDto).orElse(null);
     }
 
     @Override
@@ -43,11 +43,11 @@ public class MakeServiceImpl implements MakeService {
     @Override
     public boolean updateMake(Long id, MakeDto makeDto) {
         return this.makeRepository.findById(id)
-                .map(make -> {
-                    make.setName(makeDto.getName());
-                    this.makeRepository.save(make);
-                    return true;
-                }).orElse(false);
+            .map(make -> {
+                make.setName(makeDto.getName());
+                this.makeRepository.save(make);
+                return true;
+            }).orElse(false);
     }
 
     @Override

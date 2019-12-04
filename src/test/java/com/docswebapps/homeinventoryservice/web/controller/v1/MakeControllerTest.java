@@ -71,8 +71,8 @@ class MakeControllerTest {
                 .andExpect(status().isOk());
 
         // Sad Path
-        when(this.makeService.getMakeById(anyLong())).thenReturn(MakeDto.builder().build());
-        mockMvc.perform(get(URL)
+        when(this.makeService.getMakeById(anyLong())).thenReturn(null);
+        mockMvc.perform(get(URL + this.id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }

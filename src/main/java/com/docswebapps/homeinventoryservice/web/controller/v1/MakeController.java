@@ -30,7 +30,7 @@ public class MakeController {
     @GetMapping("/{makeId}")
     public ResponseEntity<MakeDto> getMakeById(@PathVariable("makeId") Long makeId) {
         MakeDto makeDto = this.makeService.getMakeById(makeId);
-        return makeDto.toString().isEmpty()
+        return makeDto == null
                 ? ResponseEntity.notFound().build()
                 : ResponseEntity.ok().body(makeDto);
     }
