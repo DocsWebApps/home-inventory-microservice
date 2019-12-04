@@ -36,7 +36,9 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public Long saveOwner(OwnerDto ownerDto) {
-        return this.ownerRepository.save(this.ownerMapper.ownerDtoToOwner(ownerDto)).getId();
+        return this.ownerRepository
+                .save(this.ownerMapper.ownerDtoToOwner(ownerDto))
+                .getId();
     }
 
     @Override

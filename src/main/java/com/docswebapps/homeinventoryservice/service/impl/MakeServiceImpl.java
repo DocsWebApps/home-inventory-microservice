@@ -37,7 +37,9 @@ public class MakeServiceImpl implements MakeService {
 
     @Override
     public Long saveMake(MakeDto makeDto) {
-        return this.makeRepository.save(this.makeMapper.makeDtoToMake(makeDto)).getId();
+        return this.makeRepository
+                .save(this.makeMapper.makeDtoToMake(makeDto))
+                .getId();
     }
 
     @Override
