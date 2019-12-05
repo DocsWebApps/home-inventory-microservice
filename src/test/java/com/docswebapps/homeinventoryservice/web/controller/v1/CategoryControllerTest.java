@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -41,7 +41,7 @@ class CategoryControllerTest {
     void getAllCategories() throws Exception {
         // Happy Path
         when(this.categoryService.getAllCategories())
-                .thenReturn(Arrays.asList(CategoryDto.builder().build(), CategoryDto.builder().build()));
+                .thenReturn(Collections.singletonList(this.categoryDto));
         mockMvc.perform(get(URL)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

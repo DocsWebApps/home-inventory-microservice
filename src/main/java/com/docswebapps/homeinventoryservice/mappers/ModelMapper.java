@@ -7,10 +7,10 @@ import org.mapstruct.Mapping;
 
 @Mapper(uses = {DateMapper.class})
 public interface ModelMapper {
-    ModelDto modelDtoToModel(Model model);
+    ModelDto modelToModelDto(Model model);
 
-    @Mapping(target = "modelMake", ignore = true)
     @Mapping(target="version", ignore = true)
     @Mapping(target="items", ignore = true)
+    @Mapping(target = "modelMake", ignore = true)
     Model modelDtoToModel(ModelDto modelDto);
 }

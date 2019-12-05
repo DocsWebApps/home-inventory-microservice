@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -40,7 +40,7 @@ class LocationControllerTest {
     @Test
     void getAllLocations() throws Exception {
         // Happy Path
-        when(this.locationService.getAllLocations()).thenReturn(Arrays.asList(LocationDto.builder().build(), LocationDto.builder().build()));
+        when(this.locationService.getAllLocations()).thenReturn(Collections.singletonList(this.locationDto));
         this.mockMvc.perform(get(URL)
                     .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk());

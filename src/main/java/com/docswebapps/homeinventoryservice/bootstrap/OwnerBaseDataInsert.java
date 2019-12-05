@@ -17,10 +17,10 @@ public class OwnerBaseDataInsert implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (ownerRepository.count() == 0) {
-            ownerRepository.save(Owner.builder().name("Dave").build());
-            ownerRepository.save(Owner.builder().name("Sarah").build());
-            ownerRepository.save(Owner.builder().name("Frazer").build());
-            ownerRepository.save(Owner.builder().name("Jessica").build());
+            ownerRepository.save(Owner.builder().name("DAVE").build());
+            ownerRepository.save(Owner.builder().name("SARAH").build());
+            ownerRepository.save(Owner.builder().name("FRAZER").build());
+            ownerRepository.save(Owner.builder().name("JESSICA").build());
         }
     }
 }

@@ -32,9 +32,9 @@ public class ItemBaseDataInsert implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Optional<Owner> owner = this.ownerRepository.findByName("Dave");
-        Optional<Category> category = this.categoryRepository.findByName("Electronic");
-        Optional<Location> location = this.locationRepository.findByName("Living Room");
+        Optional<Owner> owner = this.ownerRepository.findByName("DAVE");
+        Optional<Category> category = this.categoryRepository.findByName("ELECTRONIC");
+        Optional<Location> location = this.locationRepository.findByName("LIVING ROOM");
         Optional<Model> model = this.modelRepository.findByName("S5");
 
         if (owner.isPresent() && location.isPresent() && category.isPresent() && model.isPresent() && this.itemRepository.count() == 0) {

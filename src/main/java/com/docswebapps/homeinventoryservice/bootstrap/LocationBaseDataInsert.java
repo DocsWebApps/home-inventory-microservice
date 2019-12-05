@@ -17,11 +17,10 @@ public class LocationBaseDataInsert implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (locationRepository.count() == 0) {
-            locationRepository.save(Location.builder().name("Living Room").build());
-            locationRepository.save(Location.builder().name("Garage").build());
-            locationRepository.save(Location.builder().name("Shed").build());
-            locationRepository.save(Location.builder().name("Dining Room").build());
-            locationRepository.save(Location.builder().name("Test").build());
+            locationRepository.save(Location.builder().name("LIVING ROOM").build());
+            locationRepository.save(Location.builder().name("GARAGE").build());
+            locationRepository.save(Location.builder().name("SHED").build());
+            locationRepository.save(Location.builder().name("DINING ROOM").build());
         }
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -40,7 +40,7 @@ class OwnerControllerTest {
     @Test
     void getAllOwners() throws Exception {
         // Happy Path
-        when(this.ownerService.getAllOwners()).thenReturn(Arrays.asList(OwnerDto.builder().build(), OwnerDto.builder().build()));
+        when(this.ownerService.getAllOwners()).thenReturn(Collections.singletonList(this.ownerDto));
         mockMvc.perform(get(URL)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

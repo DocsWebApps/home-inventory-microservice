@@ -17,10 +17,10 @@ public class CategoryBaseDataInsert implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (categoryRepository.count() == 0) {
-            categoryRepository.save(Category.builder().name("Electronic").build());
-            categoryRepository.save(Category.builder().name("Books").build());
-            categoryRepository.save(Category.builder().name("Jewellery").build());
-            categoryRepository.save(Category.builder().name("Furniture").build());
+            categoryRepository.save(Category.builder().name("ELECTRONIC").build());
+            categoryRepository.save(Category.builder().name("BOOKS").build());
+            categoryRepository.save(Category.builder().name("JEWELERY").build());
+            categoryRepository.save(Category.builder().name("FURNITURE").build());
         }
     }
 }
