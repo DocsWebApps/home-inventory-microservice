@@ -1,24 +1,40 @@
 package com.docswebapps.homeinventoryservice.domain;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Builder
 @Table(name = "items")
-public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
-    private Long id;
+public class Item extends Base {
+
+    @Builder
+    public Item (Long id, String name, Timestamp createdDate, Timestamp lastModifiedDate, Long version,
+                 Double cost, String serialNumber, LocalDate purchaseDate, boolean haveReceipt,
+                 String additionalInfo, Model itemModel, Owner itemOwner, Category itemCategory,
+                 Location itemLocation) {
+        super(id, name, createdDate, lastModifiedDate, version);
+        this.itemOwner = itemOwner;
+        this.itemCategory = itemCategory;
+        this.itemLocation = itemLocation;
+        this.haveReceipt = haveReceipt;
+        this.additionalInfo = additionalInfo;
+        this.purchaseDate = purchaseDate;
+        this.itemModel = itemModel;
+        this.cost = cost;
+        this.serialNumber = serialNumber;
+    }
 
     @Column
     private Double cost;
@@ -34,18 +50,6 @@ public class Item {
 
     @Column
     private String additionalInfo;
-
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
-    private Timestamp createdDate;
-
-    @UpdateTimestamp
-    @Column(nullable = false)
-    private Timestamp lastModifiedDate;
-
-    @Version
-    @Column(nullable = false)
-    private Long version;
 
     @ManyToOne
     private Model itemModel;

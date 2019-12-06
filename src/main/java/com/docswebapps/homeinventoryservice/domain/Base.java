@@ -3,7 +3,6 @@ package com.docswebapps.homeinventoryservice.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,7 +10,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
@@ -35,4 +33,24 @@ class Base {
     @Version
     @Column(nullable = false)
     private Long version;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setLastModifiedDate(Timestamp lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 }

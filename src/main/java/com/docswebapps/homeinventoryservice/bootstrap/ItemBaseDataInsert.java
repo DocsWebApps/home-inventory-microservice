@@ -39,6 +39,7 @@ public class ItemBaseDataInsert implements CommandLineRunner {
 
         if (owner.isPresent() && location.isPresent() && category.isPresent() && model.isPresent() && this.itemRepository.count() == 0) {
             this.itemRepository.save(Item.builder()
+                    .name("My Phone")
                     .additionalInfo("AdditionalInfo")
                     .cost(399.99d)
                     .haveReceipt(false)
